@@ -1,5 +1,12 @@
+# Establish connection
+conn = Bunny.new("<%= @connection_string %>", :heartbeat => 5)
+channel = conn.create_channel
+
 # Declare exchanges
 <%= render :partial => "exchange", :collection => Exchange.all %>
 
 # Declare bindings
 <%= render :partial => "message_route", :collection => MessageRoute.all %>
+
+# Close connection
+conn.close

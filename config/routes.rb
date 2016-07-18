@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :message_routes
   resources :exchanges
-  resources :configurations do
+  resources :configurations, :only => [:index] do
     collection do
       get :download
     end

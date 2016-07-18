@@ -1,0 +1,11 @@
+= form_tag download_configurations_path(:format => :rb), method: :get do |f|
+  .field
+    = label_tag :connection_string
+    = text_field_tag :connection_string
+  .field
+    = label_tag :environment
+    = text_field_tag :environment
+  .field
+    = label_tag :hbx_id
+    = text_field_tag :hbx_id
+  = submit_tag 
