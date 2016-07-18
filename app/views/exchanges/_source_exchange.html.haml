@@ -1,7 +1,8 @@
-- dest_exchanges = source_exchange.destination_exchanges
-- if dest_exchanges.any?
+- routes_from = source_exchange.routes_from
+- if routes_from.any?
   %ul
-    - dest_exchanges.each do |dest|
+    - routes_from.each do |m_route|
       %li
-        %p= dest.display_name
-        = render partial: "source_exchange", object: dest
+        %p= m_route.routing_key
+        %p= m_route.to_exchange.display_name
+        = render partial: "source_exchange", object: m_route.to_exchange

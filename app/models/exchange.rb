@@ -1,4 +1,4 @@
-class Exchange < ActiveRecord::Base
+class Exchange < ApplicationRecord
   has_many :routes_from, class_name: "MessageRoute", inverse_of: :from_exchange, :foreign_key => :from_exchange_id
   has_many :routes_to, class_name: "MessageRoute", inverse_of: :to_exchange, :foreign_key => :to_exchange_id
 

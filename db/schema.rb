@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715183038) do
+ActiveRecord::Schema.define(version: 20160718155205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,16 @@ ActiveRecord::Schema.define(version: 20160715183038) do
   create_table "message_routes", force: :cascade do |t|
     t.integer "from_exchange_id"
     t.integer "to_exchange_id"
+    t.string  "routing_key"
     t.index ["from_exchange_id"], name: "index_message_routes_on_from_exchange_id", using: :btree
     t.index ["to_exchange_id"], name: "index_message_routes_on_to_exchange_id", using: :btree
+  end
+
+  create_table "route_arguments", force: :cascade do |t|
+    t.integer "message_route_id"
+    t.string  "key",              limit: 512
+    t.string  "value",            limit: 512
+    t.index ["message_route_id"], name: "index_route_arguments_on_message_route_id", using: :btree
   end
 
 end

@@ -6,11 +6,10 @@
         - @message_route.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :from_exchange_id
-    = f.select :from_exchange_id, Exchange.all.map { |ex| [ex.display_name, ex.id ]}
-  .field
-    = f.label :to_exchange_id
-    = f.select :to_exchange_id, Exchange.all.map { |ex| [ex.display_name, ex.id ]}
+  - selectable_exchanges = Exchange.all.map { |ex| {display: h(ex.display_name), id: ex.id, kind: ex.exchange_kind } }
+  - route_arguments = []
+  - @message_route.route_arguments.each_with_index { |ra, idx| route_arguments << {id: ra.id, key: ra.key, value: ra.value, message_route_id: ra.message_route_id, index: idx} }
+  = react_component("MessageRouteForm", {prefix: f.object_name, exchanges: selectable_exchanges, from_exchange_id: f.object.from_exchange_id, to_exchange_id: f.object.to_exchange_id, from_exchange_kind: (f.object.from_exchange ? f.object.from_exchange.exchange_kind : selectable_exchanges.first[:kind]), routing_arguments: route_arguments, routing_key: @message_route.routing_key })
+
   .actions
     = f.submit 'Save'

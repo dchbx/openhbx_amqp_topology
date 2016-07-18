@@ -69,6 +69,6 @@ class MessageRoutesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_route_params
-      params.require(:message_route).permit(:to_exchange_id, :from_exchange_id)
+      params.require(:message_route).permit(:to_exchange_id, :from_exchange_id, :routing_key, route_arguments_attributes: [:id, :message_route_id, :key, :value])
     end
 end
