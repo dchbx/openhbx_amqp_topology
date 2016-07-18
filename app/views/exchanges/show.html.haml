@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @exchange.name
+%p
+  %b Exchange kind:
+  = @exchange.exchange_kind
+
+= render partial: "source_exchange", object: @exchange
+
+= link_to 'Edit', edit_exchange_path(@exchange)
+\|
+= link_to 'Back', exchanges_path

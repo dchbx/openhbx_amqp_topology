@@ -1,0 +1,7 @@
+- dest_exchanges = source_exchange.destination_exchanges
+- if dest_exchanges.any?
+  %ul
+    - dest_exchanges.each do |dest|
+      %li
+        %p= dest.display_name
+        = render partial: "source_exchange", object: dest

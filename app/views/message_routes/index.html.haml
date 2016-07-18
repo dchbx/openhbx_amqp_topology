@@ -1,0 +1,23 @@
+%h1 Listing message_routes
+
+%table
+  %thead
+    %tr
+      %th From exchange
+      %th To exchange
+      %th
+      %th
+      %th
+
+  %tbody
+    - @message_routes.each do |message_route|
+      %tr
+        %td= message_route.from_exchange.display_name
+        %td= message_route.to_exchange.display_name
+        %td= link_to 'Show', message_route
+        %td= link_to 'Edit', edit_message_route_path(message_route)
+        %td= link_to 'Destroy', message_route, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Message route', new_message_route_path

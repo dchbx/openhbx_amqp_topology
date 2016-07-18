@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b From exchange:
+  = @message_route.from_exchange.display_name
+%p
+  %b To exchange:
+  = @message_route.to_exchange.display_name
+
+= link_to 'Edit', edit_message_route_path(@message_route)
+\|
+= link_to 'Back', message_routes_path
