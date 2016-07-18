@@ -1,8 +1,25 @@
 - routes_from = source_exchange.routes_from
 - if routes_from.any?
-  %ul
-    - routes_from.each do |m_route|
-      %li
-        %p= m_route.routing_key
-        %p= m_route.to_exchange.display_name
-        = render partial: "source_exchange", object: m_route.to_exchange
+  - if source_exchange.fanout_exchange?
+    %p Fanout to:
+    %ul
+      - routes_from.each do |m_route|
+        %li
+          %p= m_route.to_exchange.display_name
+          = render partial: "source_exchange", object: m_route.to_exchange
+  - elsif source_exchange.headers_exchange?
+    %ul
+      - routes_from.each do |m_route|
+        %li
+          %p Header match:
+          %ul
+            - m_route.route_arguments.each do |route_arg|
+              %li= route_arg.key + ": " + route_arg.value
+          %p= m_route.to_exchange.display_name
+          = render partial: "source_exchange", object: m_route.to_exchange
+  -else 
+    %ul
+      - routes_from.each do |m_route|
+        %li
+          %p= "Routing key: " + m_route.routing_key
+          = render partial: "source_exchange", object: m_route.to_exchange

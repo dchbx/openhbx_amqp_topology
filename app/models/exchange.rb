@@ -10,12 +10,20 @@ class Exchange < ApplicationRecord
     fanout
     topic
     direct
-    header
+    headers
   )
 
   validates_inclusion_of :exchange_kind, :in => ALLOWED_KINDS, :allow_blank => false
 
   def display_name
     "#{name} (#{exchange_kind})"
+  end
+
+  def headers_exchange?
+    exchange_kind == "headers"
+  end
+
+  def fanout_exchange?
+    exchange_kind == "fanout"
   end
 end

@@ -8,6 +8,7 @@ var RouteArgumentForm = React.createClass({
      var key = routingArgument.key;
      var value = routingArgument.value;
      var id = routingArgument.id;
+     var parentForm = this.props.parentForm;
      var id_field = "";
      if (id != null) {
        id_field = <input type="hidden" name={prefixName + "[id]"} value={id} />
@@ -23,6 +24,9 @@ var RouteArgumentForm = React.createClass({
 	    <label htmlFor={prefixId + "_value"}>Value</label>
                 <input type="text" name={prefixName + "[value]"} id={prefixId + "_value"} defaultValue={value}/>
 	  </div>
+	  <p>
+            <a href="#" onClick={parentForm.deleteArg} data-index={index}>Delete</a>
+	  </p>
 	</div>
      );
   }

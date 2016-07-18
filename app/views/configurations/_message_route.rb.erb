@@ -1,0 +1,14 @@
+<% to_exchange = message_route.to_exchange %>
+<% from_exchange = message_route.from_exchange %>
+<% if from_exchange.fanout_exchange? %>
+exchange_no_<%= from_exchange.id  %>.bind(exchange_no_<%= to_exchange.id %>)
+<% elsif from_exchange.headers_exchange? %>
+exchange_no_<%= from_exchange.id  %>.bind(exchange_no_<%= to_exchange.id %>, :arguments => {
+<% argument_max = message_route.route_arguments.length - 1 %>
+<% message_route.route_arguments.each_with_index do |ra, idx| %>
+	"<%= ra.key %>" => "<%= ra.value %>"<%= (idx == argument_max) ? "" : "," %>
+<% end %>
+})
+<% else %>
+exchange_no_<%= to_exchange.id %>.bind(exchange_no_<%= to_exchange.id %>, :routing_key => "<%= message_route.routing_key %>")
+<% end %>

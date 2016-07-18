@@ -1,0 +1,1 @@
+exchange_no_<%= exchange.id %> = channel.exchange("<%= @hbx_id %>.<%= @environment_name %>.e.<%= exchange.exchange_kind %>.<%= exchange.name %>", { :durable => true, :type => "<%= exchange.exchange_kind %>"})
