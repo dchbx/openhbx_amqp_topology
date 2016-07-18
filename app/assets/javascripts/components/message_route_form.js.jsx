@@ -5,7 +5,7 @@ var MessageRouteForm = React.createClass({
        from_exchange_id: this.props.from_exchange_id,
        to_exchange_id: this.props.to_exchange_id,
        routing_arguments: this.props.routing_arguments,
-       routing_key: this.props.routing_key
+       routing_key: this.props.routing_key,
     });
   },
   handleFromExchangeSelect: function(e) {
