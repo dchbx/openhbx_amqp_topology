@@ -3,6 +3,7 @@ class CreateMessageRoutes < ActiveRecord::Migration[5.0]
     create_table :message_routes do |t|
       t.integer :from_exchange_id, :allow_nil => false
       t.integer :to_exchange_id, :allow_nil => false
+      t.string :routing_key, :allow_nil => true
     end
 
     add_index :message_routes, :from_exchange_id
