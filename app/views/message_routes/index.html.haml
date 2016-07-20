@@ -1,6 +1,6 @@
 %h3 Message Routes
 
-%table.table.table-striped.table-bordered.table-condensed
+%table.table.table-sm
   %thead
     %tr
       %th From exchange
@@ -14,9 +14,9 @@
       %tr
         %td= message_route.from_exchange.display_name
         %td= message_route.to_exchange.display_name
-        %td= link_to 'Show', message_route
-        %td= link_to 'Edit', edit_message_route_path(message_route)
-        %td= link_to 'Destroy', message_route, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', message_route, { :class => "btn btn-primary"}
+        %td= link_to 'Edit', edit_message_route_path(message_route), { :class => "btn btn-secondary" }
+        %td= link_to 'Destroy', message_route, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-secondary"
 
 %br
 
