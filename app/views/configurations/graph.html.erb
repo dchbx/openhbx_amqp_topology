@@ -1,0 +1,89 @@
+<div id="viewport" style="width: 1024px; height: 512px;"></div>
+
+<script>
+function processNodes(gs) {
+  <% Exchange.all.each do |ex| %>
+    gs.add({
+      data: {
+        id: "exchange_node_<%= ex.id %>",
+        name: "<%= ex.display_name %>"
+      }
+    });
+  <% end %>
+
+  <% MessageRoute.all.each do |mr| %>
+    <% if mr.from_exchange.fanout_exchange? %>
+	    gs.add({
+		    data: {
+			    source: "exchange_node_<%= mr.from_exchange_id %>",
+			    target: "exchange_node_<%= mr.to_exchange_id %>"
+		    }
+	    }); 
+    <% elsif mr.from_exchange.headers_exchange? %>
+	    gs.add({
+		    data: {
+			    id: "mr_headers_<%= mr.id %>",
+			    name: "headers"
+		    }
+	    });
+	    gs.add({
+		    data: {
+			    source: "exchange_node_<%= mr.from_exchange_id %>",
+			    target: "mr_headers_<%= mr.id %>"
+		    }
+	    });
+	    <% if mr.route_arguments.count > 0 %>
+  	    <% mr.route_arguments.each do |ra| %>
+	    gs.add({
+		    data: {
+			    name: "<%= ra.key %>",
+			    source: "mr_headers_<%= mr.id %>",
+			    target: "exchange_node_<%= mr.to_exchange_id %>"
+		    }
+	    });
+            <% end %>
+	    <% else %>
+	    gs.add({
+		    data: {
+			    name: "NO HEADERS SPECIFIED",
+			    source: "mr_headers_<%= mr.id %>",
+			    target: "exchange_node_<%= mr.to_exchange_id %>"
+		    }
+	    });
+            <% end %>
+    <% else %>
+	    gs.add({
+		    data: {
+			    name: "<%= mr.routing_key %>",
+			    source: "exchange_node_<%= mr.from_exchange_id %>",
+			    target: "exchange_node_<%= mr.to_exchange_id %>"
+		    }
+	    });
+    <% end %>
+  <% end %>
+}
+
+$(function() {
+	var cy = cytoscape({
+		container: $('#viewport'),
+		style: [
+		{
+			selector: "node",
+			style: {
+				content: "data(name)"
+			}
+		},
+		{
+			selector: "edge",
+			style: {
+				label: "data(name)",
+				"target-arrow-shape": "triangle",
+				"edge-text-rotation" : "autorotate"
+			}
+		}	
+		]
+	});
+	processNodes(cy);
+	cy.layout({name: "breadthfirst", directed: true, fit: true, maximalAdjustments: 3, spacingFactor: 0.75});
+});
+</script>
