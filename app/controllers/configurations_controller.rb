@@ -18,4 +18,13 @@ class ConfigurationsController < ApplicationController
     end
   end
 
+  def dump
+    @exchanges = Exchange.all
+    @message_routes = MessageRoute.all
+    @route_arguments = RouteArgument.all
+    respond_to do |format|
+      format.json
+    end
+  end
+
 end

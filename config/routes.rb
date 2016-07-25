@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :download
       get :graph
+      get :dump
     end
   end
   root :to => "exchanges#index"
