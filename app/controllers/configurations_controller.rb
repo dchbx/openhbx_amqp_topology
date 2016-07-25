@@ -27,4 +27,20 @@ class ConfigurationsController < ApplicationController
     end
   end
 
+  def import
+    @configuration_import = ConfigurationImport.new(allowed_configuration_upload_params[:configuration_import])
+    if @configuration_import.save
+      redirect_to exchanges_path
+    else
+      render "upload"
+    end
+  end
+
+  def upload
+    @configuration_import = ConfigurationImport.new
+  end
+
+  def allowed_configuration_upload_params
+    params.permit(:configuration_import => [:definition_file])
+  end
 end

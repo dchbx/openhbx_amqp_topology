@@ -1,0 +1,10 @@
+= form_for @configuration_import, :url => import_configurations_path do |f|
+  - if @configuration_import.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@configuration_import.errors.count, "error")} prohibited this configuration from being imported:"
+      %ul
+        - @configuration_import.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label :definition_file
+  = f.file_field :definition_file
+  = f.submit "Upload"

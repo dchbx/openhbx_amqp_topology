@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get :download
       get :graph
       get :dump
+      get :upload
+      post :import
     end
   end
   root :to => "exchanges#index"
