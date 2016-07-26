@@ -16,5 +16,6 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require tether.min
 //= require bootstrap
 //= require_tree .

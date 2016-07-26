@@ -1,8 +1,9 @@
+%ol.breadcrumb
+  %li= link_to "Exchanges", exchanges_path
+  %li= @exchange.name
+
 %p#notice= notice
 
-%p
-  %b Name:
-  = @exchange.name
 %p
   %b Exchange kind:
   = @exchange.exchange_kind
