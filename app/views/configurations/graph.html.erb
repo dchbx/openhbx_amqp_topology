@@ -6,30 +6,34 @@ function processNodes(gs) {
     gs.add({
       data: {
         id: "exchange_node_<%= ex.id %>",
-        name: "<%= ex.display_name %>"
+	name: "<%= ex.display_name %>",
+	url: <%= raw exchange_path(ex).to_json %>
       }
     });
   <% end %>
 
   <% MessageRoute.all.each do |mr| %>
     <% if mr.from_exchange.fanout_exchange? %>
-	    gs.add({
+	    var mr_node_<%= mr.id%> = gs.add({
 		    data: {
 			    source: "exchange_node_<%= mr.from_exchange_id %>",
-			    target: "exchange_node_<%= mr.to_exchange_id %>"
+			    target: "exchange_node_<%= mr.to_exchange_id %>",
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    }); 
     <% elsif mr.from_exchange.headers_exchange? %>
 	    gs.add({
 		    data: {
 			    id: "mr_headers_<%= mr.id %>",
-			    name: <%= raw node_name_for_header_route(mr) %>
+			    name: <%= raw node_name_for_header_route(mr) %>,
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    });
 	    gs.add({
 		    data: {
 			    source: "exchange_node_<%= mr.from_exchange_id %>",
-			    target: "mr_headers_<%= mr.id %>"
+			    target: "mr_headers_<%= mr.id %>",
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    });
 	    <% if header_arguments_for(mr).count > 0 %>
@@ -38,7 +42,8 @@ function processNodes(gs) {
 		    data: {
 			    name: <%= raw header_argument_name_for(ra) %>,
 			    source: "mr_headers_<%= mr.id %>",
-			    target: "exchange_node_<%= mr.to_exchange_id %>"
+			    target: "exchange_node_<%= mr.to_exchange_id %>",
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    });
             <% end %>
@@ -47,7 +52,8 @@ function processNodes(gs) {
 		    data: {
 			    name: "NO HEADERS SPECIFIED",
 			    source: "mr_headers_<%= mr.id %>",
-			    target: "exchange_node_<%= mr.to_exchange_id %>"
+			    target: "exchange_node_<%= mr.to_exchange_id %>",
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    });
             <% end %>
@@ -56,7 +62,8 @@ function processNodes(gs) {
 		    data: {
 			    name: "<%= mr.routing_key %>",
 			    source: "exchange_node_<%= mr.from_exchange_id %>",
-			    target: "exchange_node_<%= mr.to_exchange_id %>"
+			    target: "exchange_node_<%= mr.to_exchange_id %>",
+			    url: <%= raw message_route_path(mr).to_json %>
 		    }
 	    });
     <% end %>
@@ -86,5 +93,17 @@ $(function() {
 	});
 	processNodes(cy);
 	cy.layout({name: "breadthfirst", directed: true, fit: true, maximalAdjustments: 3, spacingFactor: 0.75});
+	cy.on('tap', 'node', function(evt) {
+		var url_data = evt.cyTarget.data("url");
+		if (url_data != null) {
+                  window.open(url_data);
+		}
+	});
+	cy.on('tap', 'edge', function(evt) {
+		var url_data = evt.cyTarget.data("url");
+		if (url_data != null) {
+                  window.open(url_data);
+		}
+	});
 });
 </script>
