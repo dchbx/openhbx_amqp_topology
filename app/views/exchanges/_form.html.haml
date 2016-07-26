@@ -11,6 +11,6 @@
     = f.text_field :name
   .field
     = f.label :exchange_kind
-    = f.select :exchange_kind, options_for_exchange_kind, :selected => @exchange_kind
+    = f.select :exchange_kind, options_for_exchange_kind
   .actions
     = f.submit 'Save'
