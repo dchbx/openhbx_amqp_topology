@@ -5,7 +5,7 @@ module ApplicationHelper
       arg.key == "x-match"
     end
     if x_match_arg
-      headers = (x_match_arg.value == "all") ? "all" : "any"
+      match_kind = (x_match_arg.value == "all") ? "all" : "any"
     end
     "headers\n[#{match_kind}]".to_json
   end
