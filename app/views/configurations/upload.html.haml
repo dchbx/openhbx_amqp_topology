@@ -7,4 +7,4 @@
           %li= msg
   = f.label :definition_file
   = f.file_field :definition_file
-  = f.submit "Upload"
+  = f.submit "Upload", data: { confirm: "Uploading this configuration will erase your current configuration.\n\nARE YOU SURE?"}
