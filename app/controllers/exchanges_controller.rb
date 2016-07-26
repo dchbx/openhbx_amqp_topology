@@ -19,6 +19,7 @@ class ExchangesController < ApplicationController
 
   # GET /exchanges/1/edit
   def edit
+    @exchange_kind = Exchange.find(params[:id]).exchange_kind
   end
 
   # POST /exchanges
