@@ -23,7 +23,7 @@ function processNodes(gs) {
 	    gs.add({
 		    data: {
 			    id: "mr_headers_<%= mr.id %>",
-			    name: "headers"
+			    name: <%= raw node_name_for_header_route(mr) %>
 		    }
 	    });
 	    gs.add({
@@ -32,11 +32,11 @@ function processNodes(gs) {
 			    target: "mr_headers_<%= mr.id %>"
 		    }
 	    });
-	    <% if mr.route_arguments.count > 0 %>
-  	    <% mr.route_arguments.each do |ra| %>
+	    <% if header_arguments_for(mr).count > 0 %>
+  	    <% header_arguments_for(mr).each do |ra| %>
 	    gs.add({
 		    data: {
-			    name: "<%= ra.key %>",
+			    name: <%= raw header_argument_name_for(ra) %>,
 			    source: "mr_headers_<%= mr.id %>",
 			    target: "exchange_node_<%= mr.to_exchange_id %>"
 		    }
