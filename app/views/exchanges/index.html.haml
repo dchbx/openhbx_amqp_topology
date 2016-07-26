@@ -5,14 +5,13 @@
     %tr
       %th Name
       %th Exchange kind
-      %th{:colspan => 3}
+      %th{:colspan => 2}
 
   %tbody
     - @exchanges.each do |exchange|
       %tr
-        %td= exchange.name
+        %td= link_to exchange.name, exchange
         %td= exchange.exchange_kind
-        %td= link_to 'Show', exchange, { :class => "btn btn-primary"}
         %td= link_to 'Edit', edit_exchange_path(exchange), { :class => "btn btn-secondary" }
         %td= link_to 'Destroy', exchange, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-secondary"
 

@@ -1,16 +1,16 @@
 = form_for @exchange do |f|
   - if @exchange.errors.any?
-    #error_explanation
+    .alert.alert-danger{:role => "alert"}
       %h2= "#{pluralize(@exchange.errors.count, "error")} prohibited this exchange from being saved:"
       %ul
         - @exchange.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: "form-control"
+  .form-group
     = f.label :exchange_kind
-    = f.select :exchange_kind, options_for_exchange_kind
+    = f.select :exchange_kind, options_for_exchange_kind, {}, {class: "form-control"}
   .actions
     = f.submit 'Save'
