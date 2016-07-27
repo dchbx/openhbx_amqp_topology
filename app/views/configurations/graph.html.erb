@@ -8,6 +8,10 @@ function processNodes(gs) {
         id: "exchange_node_<%= ex.id %>",
 	name: "<%= ex.display_name %>",
 	url: <%= raw exchange_path(ex).to_json %>
+      },
+      style: {
+	      width: <%= ex.display_name.length * 8.2 %>,
+	      height: "20px"
       }
     });
   <% end %>
@@ -27,6 +31,15 @@ function processNodes(gs) {
 			    id: "mr_headers_<%= mr.id %>",
 			    name: <%= raw node_name_for_header_route(mr) %>,
 			    url: <%= raw message_route_path(mr).to_json %>
+	            },
+		    style: {
+			    "text-wrap": "wrap",
+			    width: "80px",
+			    height: "40px",
+			    color: "black",
+			    "background-color": "white",
+			    "border-width": "1px",
+                            "border-color": "black"
 		    }
 	    });
 	    gs.add({
@@ -77,7 +90,13 @@ $(function() {
 		{
 			selector: "node",
 			style: {
-				content: "data(name)"
+				content: "data(name)",
+				"background-color": "green",
+				height: "label",
+				shape: "rectangle",
+				"text-valign": "center",
+				"text-halign": "center",
+				color: "white"
 			}
 		},
 		{
@@ -92,7 +111,6 @@ $(function() {
 		]
 	});
 	processNodes(cy);
-	cy.layout({name: "breadthfirst", directed: true, fit: true, maximalAdjustments: 3, spacingFactor: 0.75});
 	cy.on('tap', 'node', function(evt) {
 		var url_data = evt.cyTarget.data("url");
 		if (url_data != null) {
@@ -105,5 +123,6 @@ $(function() {
                   window.open(url_data);
 		}
 	});
+	cy.layout({name: "breadthfirst", directed: true, fit: true, maximalAdjustments: 3, spacingFactor: 0.75});
 });
 </script>
