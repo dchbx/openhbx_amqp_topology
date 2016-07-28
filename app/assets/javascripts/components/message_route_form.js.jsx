@@ -28,7 +28,7 @@ var MessageRouteForm = React.createClass({
     });
   },
   deleteArg: function(e) {
-    var idx = $(e.target).attr("data-index");
+    var idx = $(e.currentTarget).attr("data-index");
     e.preventDefault();
     var r_args = this.state.routing_arguments;
     var selected_item = r_args.filter(function(item) {

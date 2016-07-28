@@ -15,7 +15,7 @@ var RouteArgumentForm = React.createClass({
      }
      return(
         <fieldset>
-	  <legend>Argument <i className="fa fa-times" onClick={parentForm.deleteArg} data-index={index}></i></legend>
+	  <legend>Argument <a href="#" data-index={index} onClick={parentForm.deleteArg}><i className="fa fa-times"></i></a></legend>
 	  {id_field}
 	  <div className="form-group">
 	    <label htmlFor={prefixId + "_key"}>Key</label>
