@@ -100,25 +100,25 @@ var MessageRouteForm = React.createClass({
    }
    return(
            <div>
-	     <div className="field">
+	     <div className="form-group">
                 <label htmlFor={prefix + "_from_exchange_id"}>From Exchange</label>
-                <select name={prefix + "[from_exchange_id]"} id={prefix + "_from_exchange_id"} defaultValue={selectedFromId} onChange={this.handleFromExchangeSelect}>
+                <select className="form-control" name={prefix + "[from_exchange_id]"} id={prefix + "_from_exchange_id"} defaultValue={selectedFromId} onChange={this.handleFromExchangeSelect}>
 		  {exchanges.map(function(ex) {
                     return(<option value={ex.id} key={"from_exchange_option_" + ex.id}>{ex.display}</option>);  
                   })} 
 		</select>
 	     </div>
-	     <div className="field">
+	     <div className="form-group">
                 <label htmlFor={prefix + "_to_exchange_id"}>To Exchange</label>
-                <select name={prefix + "[to_exchange_id]"} id={prefix + "_to_exchange_id"} defaultValue={selectedToId} onChange={this.handleToExchangeSelect}>
+                <select className="form-control" name={prefix + "[to_exchange_id]"} id={prefix + "_to_exchange_id"} defaultValue={selectedToId} onChange={this.handleToExchangeSelect}>
 		  {exchanges.map(function(ex) {
                     return(<option value={ex.id} key={"to_exchange_option_" + ex.id} kind={ex.kind}>{ex.display}</option>);  
                   })} 
 		</select>
 	     </div>
-	     <div className="field">
+	     <div className="form-group">
                 <label htmlFor={prefix + "_routing_key"}>Routing Key</label>
-                <input type="text" name={prefix + "[routing_key]"} id={prefix + "_routing_key"} defaultValue={routing_key}/>
+                <input className="form-control" type="text" name={prefix + "[routing_key]"} id={prefix + "_routing_key"} defaultValue={routing_key}/>
 	     </div>
 	     {routingArgFields}
 	     {addArgsButton}
