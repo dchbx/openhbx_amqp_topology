@@ -8,3 +8,4 @@ support/compiled/spec/*
 !support/compiled/spec/fixtures/
 support/compiled/spec/fixtures/*
 !support/compiled/spec/fixtures/dependencies.js
+test_results/*.xml
