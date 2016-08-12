@@ -1,3 +1,5 @@
+// Dependencies: [./model_text_field]
+
 var RouteArgumentForm = React.createClass({
   render: function() {
      var routingArgument = this.props.routingArgument;

@@ -10,7 +10,8 @@ describe("RouteArgumentForm", function() {
      this.routingArgument = {
        index: 3,
        key: 'the key',
-       value: 'the value'
+       value: 'the value',
+       errors: {}
      };
      this.parentForm = { };
      this.prefix = "some_object_prefix";
