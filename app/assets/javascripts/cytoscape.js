@@ -24582,6 +24582,3 @@ module.exports = ( typeof window === 'undefined' ? null : window );
 
 },{}]},{},[76])(76)
 });
-
-
-//# sourceMappingURL=cytoscape.js.map
