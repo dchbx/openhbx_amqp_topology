@@ -53,7 +53,8 @@ var MessageRouteForm = React.createClass({
            id: null,
 	   key: null,
 	   value: null,
-           index: this.state.max_arg_index
+           index: this.state.max_arg_index,
+	   errors: {}
     };
     new_arguments = existing_args.concat([new_arg]);
     e.preventDefault();
