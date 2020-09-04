@@ -20,7 +20,7 @@
     "jasmine-reporters" : "2.2.0",
     "jquery": "1.6.2",
     "jsdom": "^3.1.2",
-    "react": "^0.13.3",
+    "react": "^16.13.1",
     "react-test-utils": "0.0.1",
     "rewire": "^2.3.4"
   }
